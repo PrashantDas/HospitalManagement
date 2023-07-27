@@ -1,0 +1,29 @@
+{% extends 'base.html' %}
+{% load crispy_forms_tags %}
+
+<!doctype html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>{% block title %}Delete Visit
+    {% endblock %}</title>
+</head>
+
+<body>
+
+  {% block content %}
+  <h3>Delete Visit</h3>
+  <form method="post">{% csrf_token %}
+    Details:
+    <p>{{object.date}},  {{ object.disease }}</p>
+    <button class="btn btn-danger" type="submit">Delete</button>
+    <button class="btn btn-warning" type="submit"><a href="{% url 'visits' %}">Back</a></button>
+
+  </form>
+  {% endblock %}
+
+</body>
+
+</html>

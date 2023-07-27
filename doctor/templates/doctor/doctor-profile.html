@@ -1,0 +1,75 @@
+{% extends 'base.html' %}
+
+<!doctype html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>{% block title %}Doctor Profile
+    {% endblock %}</title>
+</head>
+
+<body>
+
+  {% block content %}
+  <h3>Doctor Profile</h3>
+  <br>
+  <div class="row">
+    <div class="col col-5">
+      <div class="card" style="width: 18rem;">
+        <div class="card-body">
+          <h5 class="card-title">Dr. {{ user.first_name }} {{ user.last_name }}</h5><small>
+            {{ user.doctorprofile.specialization }}</small>
+          <h6 class="card-subtitle mb-2 text-body-secondary"></h6>
+          <p class="card-text">Hello I'm Dr. {{ user.doctorprofile.name }}</p>
+          <small>Fees: {{ user.doctorprofile.fees }} Rs.</small>
+          <br><br>          
+          <button class="btn btn-warning" type="submit"><a href="{% url 'edit' %}">Edit Profile</a></button>
+        </div>
+      </div>
+    </div>
+    <div class="col col-5">
+      <legend>My Patients</legend>
+      <table class="table table-striped">
+        <thead>
+          <tr>
+            <th scope="col">#</th>
+            <th scope="col">Picture</th>
+            <th scope="col">Name</th>
+            <th scope="col">Gender</th>
+            <th scope="col">Date of Birth</th>            
+            <th scope="col">Delete</th>
+          </tr>
+        </thead>
+        <tbody>
+          {% for each in my_patients %}
+          <tr>
+            <th scope="row">{{ forloop.counter }}</th>
+            
+            <td>
+              <div class="card">
+                <div class="card-body">
+                  <img src="{{ each.picture.url }}" class="img-thumbnail rounded mx-auto d-block" alt="{{ each.name }}'s Photo">
+                </div>
+              </div>
+            </td>
+            <td>{{ each.name }}</td>
+            <td>{{ each.gender }}</td>
+            <td>{{ each.dob }}</td>
+            <td><button class="btn btn-danger" type="submit"><a href="{% url 'delete' each.id %}">Delete</a></button></td>
+          </tr>
+          {% endfor %}
+        </tbody>
+      </table>
+
+
+
+
+    </div>
+  </div>
+  {% endblock %}
+
+</body>
+
+</html>

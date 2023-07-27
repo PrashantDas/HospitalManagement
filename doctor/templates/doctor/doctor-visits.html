@@ -1,0 +1,79 @@
+{% extends 'base.html' %}
+
+<!doctype html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>{% block title %}Visits to Doctor
+    {% endblock %}</title>
+</head>
+<body>
+  {% block content %}
+  <h3>Patient Visits</h3>
+  <br>
+  <div class="row">
+    <div class="col">
+      <div class="card">
+        <div class="card-body">
+            <div class="col">
+                <table class="table table-striped">
+                  <thead>
+                    <tr>
+                      <th scope="col">#</th>
+                      <th scope="col">Date</th>
+                      <th scope="col">Picture</th>
+                      <th scope="col">Name</th>
+                      <th scope="col">Gender</th>
+                      <th scope="col">Disease</th>
+                      <th scope="col">Advice</th>
+                      <th scope="col">Medicine</th>
+                      <th scope="col">Tests</th>
+                      <th scope="col">Follow-up</th>
+                      <th scope="col">Delete Visit</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    {% for each in my_visits %}
+                    <tr>
+                      <th scope="row">{{ forloop.counter }}</th>
+                      <td>{{ each.date }}</td>
+                      <td>
+                        <div class="card">
+                          <div class="card-body">
+                            <img src="{{ each.patient.picture.url }}" class="img-thumbnail rounded mx-auto d-block" alt="{{ each.patient.name }}'s Photo">
+                          </div>
+                        </div>
+                      </td>
+                      <td><strong>{{ each.patient }}</strong></td>
+                      <td>{{ each.patient.gender }}</td>
+                      <td>{{ each.disease }}</td>
+                      <td>{{ each.advice }}</td>
+                      <td>{{ each.medicine }}</td>
+                      <td>{{ each.tests }}</td>
+                      <td>{{ each.follow_up }}</td>
+                      <td><a href="{% url 'delvisit' each.pk %}"><button type="submit" class="btn btn-outline-danger btn-small ">Delete</button></td>
+                      
+                    </tr>
+                    {% endfor %}
+                  </tbody>
+                </table>
+          
+          
+          
+          
+                {{ each.gender }}
+          
+              </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+  <br>
+  {% endblock %}
+
+</body>
+
+</html>
